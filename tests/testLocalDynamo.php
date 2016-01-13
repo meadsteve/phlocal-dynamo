@@ -1,11 +1,11 @@
 <?php
-namespace MeadSteve\PhlocalDynamo\Tests;
 
+namespace MeadSteve\PhlocalDynamo\Tests;
 
 use Aws\DynamoDb\DynamoDbClient;
 use MeadSteve\PhlocalDynamo\LocalDynamo;
 
-class AmlCheckTest extends \PHPUnit_Framework_TestCase
+class LocalDynamoTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var LocalDynamo

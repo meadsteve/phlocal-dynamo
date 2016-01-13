@@ -1,8 +1,6 @@
 <?php
 
-
 namespace MeadSteve\PhlocalDynamo;
-
 
 use Aws\DynamoDb\DynamoDbClient;
 use Cocur\BackgroundProcess\BackgroundProcess;
@@ -10,6 +8,7 @@ use Cocur\BackgroundProcess\BackgroundProcess;
 class LocalDynamo
 {
     private $port = "9025";
+    private $jarLocation;
 
     /**
      * @var \Cocur\BackgroundProcess\BackgroundProcess
@@ -19,14 +18,28 @@ class LocalDynamo
     /**
      * LocalDynamo constructor.
      */
-    public function __construct()
+    public function __construct($port = null, $jarLocation = null)
     {
+        if (!is_null($port)) {
+            $this->port = $port;
+        }
+
+        if (is_null($jarLocation)) {
+            $this->jarLocation = __DIR__ . "/dynamo/";
+        } else {
+            $this->jarLocation = $jarLocation;
+        }
     }
 
     public function start()
     {
-        $jarPath = __DIR__ . "/dynamo/DynamoDBLocal.jar";
-        $libPath = __DIR__ . "/dynamo/DynamoDBLocal_lib";
+        $jarPath = $this->jarLocation . "DynamoDBLocal.jar";
+        $libPath = $this->jarLocation . "DynamoDBLocal_lib";
+        if (!file_exists($jarPath)) {
+            $error = "dynamo jar file not found at {$this->jarLocation}. "
+                . "Refer to readme for installation instructions";
+            throw new \RuntimeException($error);
+        }
         $javaCmd = "java -Djava.library.path={$libPath} -jar {$jarPath} -sharedDb -inMemory -port {$this->port}";
         $this->process = new BackgroundProcess($javaCmd);
         $this->process->run();
