@@ -14,7 +14,7 @@ Java is required as Amazon provide the local DynamoDb as a jar file.
 Run ```composer require mead-steve/phlocal-dynamo```
 
 The DynamoDb.jar isn't included in this nuget to avoid licensing issues.  
-Add the contents of the zip/tar file amazon in to ```vendor\MeadSteve\PhlocalDynamo\src\dynamo```
+Add the contents of the zip/tar file from amazon in to ```vendor\MeadSteve\PhlocalDynamo\src\dynamo```
 
 Then in any test classes simply do the following
 
