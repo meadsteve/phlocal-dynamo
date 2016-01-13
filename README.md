@@ -11,7 +11,7 @@ This package is a php port of a c# library from JUST EAT: https://github.com/jus
 
 Java is required as Amazon provide the local DynamoDb as a jar file.
 
-Run ```composer require mead-steve/phlocal-dynamo
+Run ```composer require mead-steve/phlocal-dynamo```
 
 The DynamoDb.jar isn't included in this nuget to avoid licensing issues.  
 Add the contents of the zip/tar file amazon in to ```vendor\MeadSteve\PhlocalDynamo\src\dynamo```
