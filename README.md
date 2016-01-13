@@ -3,7 +3,7 @@
 This package provides a wrapper for the DynamoDb.jar that is available from AWS for local deployment.
 It is intended to speed up development and testing with dynamo db.
 
-The required dynamo libraray should be downloadable from here:  http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tools.DynamoDBLocal.html
+The required dynamo library should be downloadable from here:  http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tools.DynamoDBLocal.html
 
 This package is a php port of a c# library from JUST EAT: https://github.com/justeat/LocalDynamoDb 
 
