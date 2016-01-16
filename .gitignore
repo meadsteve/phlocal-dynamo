@@ -1,2 +1,5 @@
 /vendor/
 /src/dynamo
+
+# IDE stuff
+.idea/
