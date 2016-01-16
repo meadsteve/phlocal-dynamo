@@ -9,6 +9,8 @@ class LocalDynamo
 {
     private $port = "9025";
     private $jarLocation;
+    private $jarPath;
+    private $libPath;
 
     /**
      * @var \Cocur\BackgroundProcess\BackgroundProcess
@@ -20,6 +22,8 @@ class LocalDynamo
      */
     public function __construct($port = null, $jarLocation = null)
     {
+        $this->libPath = $this->jarLocation . "DynamoDBLocal_lib";
+        $this->jarPath = $this->jarLocation . "DynamoDBLocal.jar";
         if (!is_null($port)) {
             $this->port = $port;
         }
@@ -33,19 +37,8 @@ class LocalDynamo
 
     public function start()
     {
-        $jarPath = $this->jarLocation . "DynamoDBLocal.jar";
-        $libPath = $this->jarLocation . "DynamoDBLocal_lib";
-        if (!file_exists($jarPath)) {
-            $error = "dynamo jar file not found at {$this->jarLocation}. "
-                . "Refer to readme for installation instructions";
-            throw new \RuntimeException($error);
-        }
-        $javaCmd = "java -Djava.library.path={$libPath} -jar {$jarPath} -sharedDb -inMemory -port {$this->port}";
-        $this->process = new BackgroundProcess($javaCmd);
-        $this->process->run();
-        if(! $this->process->isRunning()) {
-            throw new \RuntimeException("Unable to start local dynamodb");
-        }
+        $this->ensureDynamoJarExists();
+        $this->startDynamoJar();
         return $this;
     }
 
@@ -55,12 +48,6 @@ class LocalDynamo
             $this->process->stop();
         }
     }
-
-    function __destruct()
-    {
-        $this->stop();
-    }
-
 
     /**
      * @return DynamoDbClient
@@ -76,5 +63,32 @@ class LocalDynamo
             'version' => '2012-08-10',
             'endpoint' => "http://localhost:" . $this->port
         ]);
+    }
+
+
+    function __destruct()
+    {
+        $this->stop();
+    }
+
+    private function ensureDynamoJarExists()
+    {
+        if (!file_exists($this->jarPath)) {
+            $error = "dynamo jar file not found at {$this->jarLocation}. "
+                . "Refer to readme for installation instructions";
+            throw new \RuntimeException($error);
+        }
+    }
+
+
+    private function startDynamoJar()
+    {
+        $javaCmd = "java -Djava.library.path={$this->libPath} "
+            . "-jar {$this->jarPath} -sharedDb -inMemory -port {$this->port}";
+        $this->process = new BackgroundProcess($javaCmd);
+        $this->process->run();
+        if (!$this->process->isRunning()) {
+            throw new \RuntimeException("Unable to start local dynamodb");
+        }
     }
 }
