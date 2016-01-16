@@ -68,6 +68,10 @@ class LocalDynamo
     public function getClient()
     {
         return new DynamoDbClient([
+            'credentials' => array(
+                'key'    => 'YOUR_AWS_ACCESS_KEY_ID',
+                'secret' => 'YOUR_AWS_SECRET_ACCESS_KEY',
+            ),
             'region' => 'local',
             'version' => '2012-08-10',
             'endpoint' => "http://localhost:" . $this->port
