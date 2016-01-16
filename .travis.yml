@@ -1,0 +1,19 @@
+language: php
+php:
+  - 5.5
+  - 5.6
+  - hhvm
+  - 7.0
+
+cache:
+  directories:
+  - vendor
+  - src/dynamo
+
+install:
+  - wget http://dynamodb-local.s3-website-us-west-2.amazonaws.com/dynamodb_local_latest.tar.gz -P src/dynamo/ -c
+  - tar xvzf src/dynamo/dynamodb_local_latest.tar.gz --directory src/dynamo/
+  - composer install
+
+script:
+  - ./vendor/bin/phpunit -c phpunit.xml
