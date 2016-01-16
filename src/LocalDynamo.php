@@ -43,6 +43,9 @@ class LocalDynamo
         $javaCmd = "java -Djava.library.path={$libPath} -jar {$jarPath} -sharedDb -inMemory -port {$this->port}";
         $this->process = new BackgroundProcess($javaCmd);
         $this->process->run();
+        if(! $this->process->isRunning()) {
+            throw new \RuntimeException("Unable to start local dynamodb");
+        }
         return $this;
     }
 
