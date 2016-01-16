@@ -1,5 +1,7 @@
 #PhlocalDynamo
 
+[![Build Status](https://travis-ci.org/meadsteve/phlocal-dynamo.svg?branch=master)](https://travis-ci.org/meadsteve/phlocal-dynamo)
+
 This package provides a wrapper for the DynamoDb.jar that is available from AWS for local deployment.
 It is intended to speed up development and testing with dynamo db.
 
