@@ -22,8 +22,6 @@ class LocalDynamo
      */
     public function __construct($port = null, $jarLocation = null)
     {
-        $this->libPath = $this->jarLocation . "DynamoDBLocal_lib";
-        $this->jarPath = $this->jarLocation . "DynamoDBLocal.jar";
         if (!is_null($port)) {
             $this->port = $port;
         }
@@ -33,6 +31,8 @@ class LocalDynamo
         } else {
             $this->jarLocation = $jarLocation;
         }
+        $this->libPath = $this->jarLocation . "DynamoDBLocal_lib";
+        $this->jarPath = $this->jarLocation . "DynamoDBLocal.jar";
     }
 
     public function start()
