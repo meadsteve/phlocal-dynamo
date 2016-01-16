@@ -5,6 +5,9 @@ php:
   - hhvm
   - 7.0
 
+jdk:
+  - openjdk7
+
 cache:
   directories:
   - vendor
