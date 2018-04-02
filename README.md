@@ -1,4 +1,4 @@
-#PhlocalDynamo
+# PhlocalDynamo
 
 [![Build Status](https://travis-ci.org/meadsteve/phlocal-dynamo.svg?branch=master)](https://travis-ci.org/meadsteve/phlocal-dynamo)
 
@@ -9,7 +9,7 @@ The required dynamo library should be downloadable from here:  http://docs.aws.a
 
 This package is a php port of a c# library from JUST EAT: https://github.com/justeat/LocalDynamoDb 
 
-##Getting Started
+## Getting Started
 
 Java is required as Amazon provide the local DynamoDb as a jar file.
 
